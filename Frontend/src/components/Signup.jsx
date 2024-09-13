@@ -2,18 +2,27 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import styles from "./Signup.module.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Signup = () => {
     const usernameRef = useRef();
     const nameRef = useRef();
     const passwordRef = useRef();
     const emailRef = useRef();
+    const { user } = useSelector((store) => store.user);
 
     const [fetched, setFetched] = useState(true);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) {
+            navigate("/");
+        }
+    }, []);
+
     const signupHandler = async (e) => {
         e.preventDefault();
         setFetched(false);
@@ -25,7 +34,7 @@ const Signup = () => {
                 password: passwordRef.current.value,
             };
             const response = await fetch(
-                "https://instaclone-backend-nu.vercel.app/api/user/signup",
+                "http://localhost:8000/api/user/signup",
                 {
                     method: "POST",
                     headers: { "content-type": "application/json" },

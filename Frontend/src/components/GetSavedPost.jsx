@@ -5,12 +5,9 @@ import { useDispatch } from "react-redux";
 const GetSavedPosts = ({ userId }) => {
     const dispatch = useDispatch();
     useEffect(() => {
-        fetch(
-            `https://instaclone-backend-nu.vercel.app/api/user/profile/saved/${userId}`,
-            {
-                credentials: "include",
-            }
-        )
+        fetch(`http://localhost:8000/api/user/profile/saved/${userId}`, {
+            credentials: "include",
+        })
             .then((res) => res.json())
             .then((res) => {
                 dispatch(userActions.setProfileSavedPosts(res.savedPosts));

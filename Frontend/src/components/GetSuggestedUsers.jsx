@@ -6,12 +6,9 @@ const GetSuggestedUsers = () => {
     const dispatch = useDispatch();
     try {
         useEffect(() => {
-            fetch(
-                "https://instaclone-backend-nu.vercel.app/api/user/suggested",
-                {
-                    credentials: "include",
-                }
-            )
+            fetch("http://localhost:8000/api/user/suggested", {
+                credentials: "include",
+            })
                 .then((res) => res.json())
                 .then((res) => {
                     if (res.success) {

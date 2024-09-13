@@ -8,12 +8,12 @@ const GetAllMessages = () => {
     useEffect(() => {
         const getMessages = async () => {
             let res = await fetch(
-                `https://instaclone-backend-nu.vercel.app/api/message/get/${selectedChat._id}`,
+                `http://localhost:8000/api/message/get/${selectedChat._id}`,
                 { credentials: "include" }
             );
             res = await res.json();
             console.log(res);
-            
+
             dispatch(chatAction.setMessages(res.messages));
         };
         getMessages();

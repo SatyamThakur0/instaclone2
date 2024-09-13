@@ -21,7 +21,7 @@ const RightSidebar = () => {
     const handleFollow = async (userId) => {
         try {
             let res = await fetch(
-                `https://instaclone-backend-nu.vercel.app/api/user/followorunfollow/${userId}`,
+                `http://localhost:8000/api/user/followorunfollow/${userId}`,
                 {
                     credentials: "include",
                     method: "POST",
