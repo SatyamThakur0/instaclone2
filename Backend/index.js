@@ -13,11 +13,12 @@ import { postRouter } from "./routes/post.route.js";
 import { messageRouter } from "./routes/message.route.js";
 import isAuthenticated from "./middlewares/userAuthentication.js";
 import { notificationRouter } from "./routes/notification.route.js";
+import { log } from "console";
 
 const PORT = process.env.PORT || 8000;
 
 const __dirname = path.resolve();
-console.log(__dirname);
+// console.log(path.join(__dirname,"/backend", "/frontend/dist"));
 
 mongoose
     .connect(process.env.MONGO_URI)
@@ -37,9 +38,11 @@ app.use("/api/post", postRouter);
 app.use("/api/message", messageRouter);
 app.use("/api/notification", notificationRouter);
 
-app.use(express.static(path.join(__dirname, "/frontend/dist")));
+app.use(express.static(path.join(__dirname, "/backend", "/frontend/dist")));
 app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+    res.sendFile(
+        path.resolve(__dirname, "/backend", "frontend", "dist", "index.html")
+    );
 });
 
 server.listen(PORT, () => console.log(`Server is live...`));
